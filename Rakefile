@@ -20,3 +20,15 @@ Rake::RDocTask.new("doc") do |rd|
   rd.main = "MARC::Record"
   rd.rdoc_dir = "doc"
 end
+
+require "rb_sys/extensiontask"
+
+task build: :compile
+
+GEMSPEC = Gem::Specification.load("marc.gemspec")
+
+RbSys::ExtensionTask.new("marc", GEMSPEC) do |ext|
+  ext.lib_dir = "lib/marc"
+end
+
+task default: %i[compile]
