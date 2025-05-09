@@ -24,6 +24,7 @@ end
 require "rb_sys/extensiontask"
 
 task build: :compile
+task test: :compile
 
 GEMSPEC = Gem::Specification.load("marc.gemspec")
 
