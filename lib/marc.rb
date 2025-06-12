@@ -46,3 +46,6 @@ require_relative "marc/dublincore"
 require_relative "marc/xml_parsers"
 require_relative "marc/jsonl_reader"
 require_relative "marc/jsonl_writer"
+
+require_relative "./marc/marc"
+require "byebug"

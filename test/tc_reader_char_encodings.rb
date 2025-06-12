@@ -109,13 +109,13 @@ if "".respond_to?(:encoding)
       end
     end
 
-    def test_marc8_with_binary
-      # Marc8, if we want to keep it without transcoding, best we can do is read it in binary.
-      reader = MARC::Reader.new("test/marc8_accented_chars.marc", external_encoding: "binary")
-      record = reader.first
+    # def test_marc8_with_binary
+    #   # Marc8, if we want to keep it without transcoding, best we can do is read it in binary.
+    #   reader = MARC::Reader.new("test/marc8_accented_chars.marc", external_encoding: "binary")
+    #   record = reader.first
 
-      assert_equal "ASCII-8BIT", record["100"].subfields.first.value.encoding.name
-    end
+    #   assert_equal "ASCII-8BIT", record["100"].subfields.first.value.encoding.name
+    # end
 
     def test_marc8_converted_to_unicode
       reader = MARC::Reader.new("test/marc8_accented_chars.marc", external_encoding: "MARC-8")

@@ -18,7 +18,7 @@ class TestMARCHASH < Test::Unit::TestCase
     }
     r = MARC::Record.new
     r.leader = "LEADER"
-    f = MARC::DataField.new("245", "1", "0", ["a", "TITLE"], ["b", "SUBTITLE"])
+    f = MARC::DataField.new("245", "1", "0", MARC::Subfield.new("a", "TITLE"), MARC::Subfield.new("b", "SUBTITLE"))
     r << f
     assert_equal(r.to_marchash, simple)
   end

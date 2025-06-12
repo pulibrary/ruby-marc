@@ -94,7 +94,7 @@ module MARC
 
     def characters(text)
       case @current_element
-      when :subfield then @record[:subfield].value << text
+      when :subfield then @record[:subfield].value = @record[:subfield].value << text
       when :field then @record[:field].value << text
       when :leader then @record[:leader] << text
       end

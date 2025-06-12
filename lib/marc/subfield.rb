@@ -1,10 +1,10 @@
-require_relative "./marc"
-require "byebug"
+# require_relative "./marc"
+# require "byebug"
 
-module MARC
-  class Subfield < MarcRs::Subfield
-  end
-end
+# module MARC
+#   class Subfield < MarcRs::Subfield
+#   end
+# end
 #   # A class that represents an individual  subfield within a DataField.
 #   # Accessor attributes include: code (letter subfield code) and value
 #   # (the content of the subfield). Both can be empty string, but should

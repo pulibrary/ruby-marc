@@ -37,7 +37,7 @@ class XMLTest < Test::Unit::TestCase
 
   def xml_entities_test(parser)
     r1 = MARC::Record.new
-    r1 << MARC::DataField.new("245", "0", "0", ["a", "foo & bar & baz"])
+    r1 << MARC::DataField.new("245", "0", "0", MARC::Subfield.new("a", "foo & bar & baz"))
     xml = r1.to_xml.to_s
     assert_match(/foo &amp; bar &amp; baz/, xml, "Failed with parser '#{parser}'")
 
@@ -132,9 +132,9 @@ class XMLTest < Test::Unit::TestCase
     record1.leader = "00925njm  22002777a 4500"
     record1.append MARC::ControlField.new("007", "sdubumennmplu")
     record1.append MARC::DataField.new("245", "0", "4",
-      ["a", "The Great Ray Charles"], ["h", "[sound recording]."])
+      MARC::Subfield.new("a", "The Great Ray Charles"), MARC::Subfield.new("h", "[sound recording]."))
     record1.append MARC::DataField.new("998", " ", " ",
-      ["^", "Valid local subfield"])
+      MARC::Subfield.new("^", "Valid local subfield"))
 
     writer = MARC::XMLWriter.new("test/test.xml", stylesheet: "style.xsl")
     writer.write(record1)
