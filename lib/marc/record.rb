@@ -281,7 +281,10 @@ module MARC
       mh["fields"].each do |f|
         if f.length == 2
           r << MARC::ControlField.new(f[0], f[1])
-        elsif r << MARC::DataField.new(f[0], f[1], f[2], *f[3])
+        else
+          f[3] = f[3].map {|sf| MARC::Subfield.new(sf[0], sf[1])}
+          if r << MARC::DataField.new(f[0], f[1], f[2], *f[3])
+          end
         end
       end
       r

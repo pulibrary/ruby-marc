@@ -68,13 +68,8 @@ module MARC
         when MARC::Subfield
           @subfields.push(subfield)
         when Array
-          if subfield.length > 2
-            raise MARC::Exception.new,
-              "arrays must only have 2 elements: " + subfield.to_s
-          end
-          @subfields.push(
-            MARC::Subfield.new(subfield[0], subfield[1])
-          )
+          raise MARC::Exception.new,
+            "don't use arrays for Subfield creation"
         else
           raise MARC::Exception.new,
             "invalid subfield type #{subfield.class}"

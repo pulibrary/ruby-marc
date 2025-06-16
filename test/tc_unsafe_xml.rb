@@ -8,9 +8,9 @@ class UnsafeXMLTest < Test::Unit::TestCase
     rec.leader = "00925njm  22002777a 4500"
     rec.append MARC::ControlField.new("007", "sdubumennmplu")
     rec.append MARC::DataField.new("245", "0", "4",
-      ["a", "The Great Ray Charles"], ["h", "[sound recording]."])
+      MARC::Subfield.new("a", "The Great Ray Charles"), MARC::Subfield.new("h", "[sound recording]."))
     rec.append MARC::DataField.new("998", " ", " ",
-      ["^", "Valid local subfield"])
+      MARC::Subfield.new("^", "Valid local subfield"))
     rec
   end
 
@@ -29,9 +29,9 @@ class UnsafeXMLTest < Test::Unit::TestCase
     record1.leader = "00925njm  22002777a 4500"
     record1.append MARC::ControlField.new("007", "sdubumennmplu")
     record1.append MARC::DataField.new("245", "0", "4",
-      ["a", "The Great Ray Charles"], ["h", "[sound recording]."])
+      MARC::Subfield.new("a", "The Great Ray Charles"), MARC::Subfield.new("h", "[sound recording]."))
     record1.append MARC::DataField.new("998", " ", " ",
-      ["^", "Valid local subfield"])
+      MARC::Subfield.new("^", "Valid local subfield"))
 
     writer = MARC::UnsafeXMLWriter.new("test/test.xml", stylesheet: "style.xsl")
     writer.write(record1)

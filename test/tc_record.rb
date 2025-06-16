@@ -62,8 +62,8 @@ class TestRecord < Test::Unit::TestCase
 
   def test_encode
     r1 = MARC::Record.new
-    r1.append(MARC::DataField.new("100", "2", "0", ["a", "Thomas, Dave"]))
-    r1.append(MARC::DataField.new("245", "0", "0", ["a", "Pragmatic Programmer"]))
+    r1.append(MARC::DataField.new("100", "2", "0", MARC::Subfield.new("a", "Thomas, Dave")))
+    r1.append(MARC::DataField.new("245", "0", "0", MARC::Subfield.new("a", "Pragmatic Programmer")))
     raw = r1.to_marc
     r2 = MARC::Record.new_from_marc(raw)
     assert_equal(r1, r2)
@@ -76,8 +76,8 @@ class TestRecord < Test::Unit::TestCase
 
   def get_record
     r = MARC::Record.new
-    r.append(MARC::DataField.new("100", "2", "0", ["a", "Thomas, Dave"]))
-    r.append(MARC::DataField.new("245", "0", "4", ["The Pragmatic Programmer"]))
+    r.append(MARC::DataField.new("100", "2", "0", MARC::Subfield.new("a", "Thomas, Dave")))
+    r.append(MARC::DataField.new("245", "0", "4", MARC::Subfield.new("The Pragmatic Programmer", "")))
     r
   end
 
@@ -127,19 +127,19 @@ class TestRecord < Test::Unit::TestCase
     # with it's own methods, does any cache update?
     r = MARC::Record.new
     assert r.fields("500").empty?
-    r.fields.push MARC::DataField.new("500", " ", " ", ["a", "notes"])
+    r.fields.push MARC::DataField.new("500", " ", " ", MARC::Subfield.new("a", "notes"))
     assert !r.fields("500").empty?, "New 505 directly added to #fields is picked up"
 
     # Do it again, make sure #[] works too
     r = MARC::Record.new
     assert r["500"].nil?
-    r.fields.push MARC::DataField.new("500", " ", " ", ["a", "notes"])
+    r.fields.push MARC::DataField.new("500", " ", " ", MARC::Subfield.new("a", "notes"))
     assert r["500"], "New 505 directly added to #fields is picked up"
   end
 
   def test_frozen_fieldmap
     r = MARC::Record.new
-    r.fields.push MARC::DataField.new("500", " ", " ", ["a", "notes"])
+    r.fields.push MARC::DataField.new("500", " ", " ", MARC::Subfield.new("a", "notes"))
 
     r.fields.freeze
 
